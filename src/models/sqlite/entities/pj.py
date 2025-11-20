@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, BIGINT, REAL
-from src.sqlite.settings.base import Base
+from src.models.sqlite.settings.base import Base
 
-class PessoaJuridicaTable(Base):
+class PJTable(Base):
     __tablename__ = "pessoa_juridica"
 
     id = Column(BIGINT, primary_key=True)
