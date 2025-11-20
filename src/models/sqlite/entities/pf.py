@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, BIGINT, REAL
-from src.sqlite.settings.base import Base
+from src.models.sqlite.settings.base import Base
 
-class PessoaFisicaTable(Base):
+class PFTable(Base):
     __tablename__ = "pessoa_fisica"
 
     id = Column(BIGINT, primary_key=True)
@@ -15,11 +15,12 @@ class PessoaFisicaTable(Base):
 
     def __repr__(self):
         return (
-        f"Pessoa juridica [\n"
-        f"  nome_completo={self.nome_completo},\n"
-        f"  idade={self.idade},\n"
-        f"  celular={self.celular},\n"
-        f"  email={self.email},\n"
-        f"  categoria={self.categoria}\n"
-        f"]"
-    )
+            f"Pessoa física [\n"
+            f"  nome_completo={self.nome_completo},\n"
+            f"  idade={self.idade},\n"
+            f"  celular={self.celular},\n"
+            f"  email={self.email},\n"
+            f"  categoria={self.categoria},\n"
+            f"  saldo={self.saldo}\n"
+            f"]"
+        )

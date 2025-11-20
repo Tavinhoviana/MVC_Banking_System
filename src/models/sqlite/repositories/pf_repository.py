@@ -1,11 +1,12 @@
 from typing import List
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.pj import PJTable
+from src.models.sqlite.entities.pf import PFTable
 
-class PJRepository:
-    def __init__(self, db_connection) -> None:
+class PFRepository:
+    def __init__(self, db_connection):
         self.__db_connection = db_connection
-    
+
     def list_pj(self) -> List[PJTable]:
         with self.__db_connection as database:
             try:
@@ -13,8 +14,8 @@ class PJRepository:
                 return pj
             except NoResultFound:
                 return []
-            
-    def create_pj(
+
+    def create_pf(
         self,
         renda_mensal: int,
         idade: int,
@@ -26,7 +27,7 @@ class PJRepository:
     ) -> None:
         with self.__db_connection as database:
             try:
-                person_data = PJTable(
+                person_data = PFTable(
                     renda_mensal=renda_mensal,
                     idade=idade,
                     nome_completo=nome_completo,
