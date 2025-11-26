@@ -2,8 +2,9 @@ from typing import List
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.pj import PJTable
 from src.models.sqlite.entities.pf import PFTable
+from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInteface
 
-class PFRepository:
+class PFRepository(PFRepositoryInteface):
     def __init__(self, db_connection):
         self.__db_connection = db_connection
 

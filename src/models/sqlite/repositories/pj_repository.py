@@ -1,8 +1,9 @@
 from typing import List
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.pj import PJTable
+from src.models.sqlite.interfaces.pj_repository_interfaces import PJRepositoryInterface
 
-class PJRepository:
+class PJRepository(PJRepositoryInterface):
     def __init__(self, db_connection) -> None:
         self.__db_connection = db_connection
     
