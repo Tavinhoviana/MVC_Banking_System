@@ -5,7 +5,7 @@ from src.models.sqlite.entities.pf import PFTable
 class PFRepositoryInteface(ABC):
 
     @abstractmethod
-    def list_pj(self) -> List[PFTable]:
+    def list_pf(self) -> List[PFTable]:
         pass
 
     @abstractmethod
