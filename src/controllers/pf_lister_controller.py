@@ -1,8 +1,9 @@
 from typing import Dict, List
 from src.models.sqlite.entities.pf import PFTable
 from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInteface
+from .interfaces.pf_lister_controller import PFListerControllerInterface
 
-class PFListerController:
+class PFListerController(PFListerControllerInterface):
     def __init__(self, pf_repository: PFRepositoryInteface):
         self.__pf_repository = pf_repository
 

@@ -1,8 +1,9 @@
 from typing import Dict
 import re
 from src.models.sqlite.interfaces.pj_repository_interfaces import PJRepositoryInterface
+from .interfaces.pj_creator_controller import PJCreatorControllerInterface
 
-class PJCreatorController:
+class PJCreatorController(PJCreatorControllerInterface):
     def __init__(self, pj_repository: PJRepositoryInterface) -> None:
         self.__pj_repository = pj_repository
 

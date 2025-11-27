@@ -1,8 +1,9 @@
 from typing import Dict
 from src.models.sqlite.interfaces.pj_repository_interfaces import PJRepositoryInterface
 from src.models.sqlite.entities.pj import PJTable
+from .interfaces.pj_finder_controller import PJFinderControllerInterface
 
-class PJFinderController:
+class PJFinderController(PJFinderControllerInterface):
     def __init__(self, pj_repository: PJRepositoryInterface) -> None:
         self.__pj_repository = pj_repository
 

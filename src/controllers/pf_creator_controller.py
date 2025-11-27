@@ -1,8 +1,9 @@
 from typing import Dict
 import re
 from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInteface
+from .interfaces.pf_creator_controller import PFCreatorControllerInterface
 
-class PFCreatorController:
+class PFCreatorController(PFCreatorControllerInterface):
     def __init__(self, pf_repository: PFRepositoryInteface) -> None:
         self.__pf_repository = pf_repository
 

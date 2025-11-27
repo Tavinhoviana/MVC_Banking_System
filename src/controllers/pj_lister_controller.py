@@ -1,8 +1,9 @@
 from typing import Dict, List
 from src.models.sqlite.entities.pj import PJTable
 from src.models.sqlite.interfaces.pj_repository_interfaces import PJRepositoryInterface
+from .interfaces.pj_lister_controller import PJListerControllerInterface
 
-class PJListerController:
+class PJListerController(PJListerControllerInterface):
     def __init__(self, pj_repository: PJRepositoryInterface):
         self.__pj_repository = pj_repository
 
