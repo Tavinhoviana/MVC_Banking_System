@@ -41,3 +41,16 @@ class PJRepository(PJRepositoryInterface):
             except Exception as exception:
                 database.session.rollback()
                 raise exception
+
+    def get_person(self, person_id: int) -> PJTable:
+        with self.__db_connection as database:
+            try:
+                person = (
+                    database.session
+                    .query(PJTable)
+                    .filter(PJTable.id == person_id)
+                    .one()
+                )
+                return person
+            except NoResultFound:
+                return None
