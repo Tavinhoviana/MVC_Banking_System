@@ -1,10 +1,10 @@
 from typing import Dict, List
 from src.models.sqlite.entities.pf import PFTable
-from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInteface
+from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInterface
 from .interfaces.pf_lister_controller import PFListerControllerInterface
 
 class PFListerController(PFListerControllerInterface):
-    def __init__(self, pf_repository: PFRepositoryInteface):
+    def __init__(self, pf_repository: PFRepositoryInterface):
         self.__pf_repository = pf_repository
 
     def list(self) -> Dict:

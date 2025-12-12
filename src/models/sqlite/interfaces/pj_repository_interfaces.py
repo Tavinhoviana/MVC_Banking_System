@@ -9,7 +9,7 @@ class PJRepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def create_pf(
+    def create_pj(
         self,
         renda_mensal: int,
         idade: int,

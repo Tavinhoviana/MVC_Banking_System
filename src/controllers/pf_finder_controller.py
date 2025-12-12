@@ -1,10 +1,10 @@
 from typing import Dict
-from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInteface
+from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInterface
 from src.models.sqlite.entities.pf import PFTable
 from .interfaces.pf_finder_controller import PFFinderControllerInterface
 
 class PFFinderController(PFFinderControllerInterface):
-    def __init__(self, pf_repository: PFRepositoryInteface) -> None:
+    def __init__(self, pf_repository: PFRepositoryInterface) -> None:
         self.__pf_repository = pf_repository
 
     def find(self, person_id: int) -> Dict:

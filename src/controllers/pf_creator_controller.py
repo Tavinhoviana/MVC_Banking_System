@@ -1,10 +1,10 @@
 from typing import Dict
 import re
-from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInteface
+from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInterface
 from .interfaces.pf_creator_controller import PFCreatorControllerInterface
 
 class PFCreatorController(PFCreatorControllerInterface):
-    def __init__(self, pf_repository: PFRepositoryInteface) -> None:
+    def __init__(self, pf_repository: PFRepositoryInterface) -> None:
         self.__pf_repository = pf_repository
 
     def create(self, person_info: Dict) -> Dict:
@@ -17,18 +17,37 @@ class PFCreatorController(PFCreatorControllerInterface):
         saldo = person_info["saldo"]
 
         self.__validate_nome_completo(nome_completo)
-        self.__insert_person_in_db(nome_completo, renda_mensal, idade, celular, email, categoria, saldo)
-        formated_response = self.__format_response(person_info)
-        return formated_response
+        self.__insert_person_in_db(
+            nome_completo, renda_mensal, idade, celular, email, categoria, saldo
+        )
+        
+        return self.__format_response(person_info)
 
-    def __validate_nome_completo(self: str, nome_completo: str) -> None:
-        non_valid_characters = re.compile(r'[^a-zA-Z]')
+    def __validate_nome_completo(self, nome_completo: str) -> None:
+        # Permite letras acentuadas e espaços
+        pattern = re.compile(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$')
+        if not pattern.match(nome_completo):
+            raise Exception("Invalid name")
 
-        if non_valid_characters.search(nome_completo):
-            raise Exception ("Invalid name")
-    
-    def __insert_person_in_db(self: str, nome_completo: str, renda_mensal: int, idade: int, celular: int, email: str, categoria: str, saldo: int) -> None:
-        self.__pf_repository.create_pf(nome_completo, renda_mensal, idade, celular, email, categoria, saldo)
+    def __insert_person_in_db(
+        self,
+        nome_completo: str,
+        renda_mensal: int,
+        idade: int,
+        celular: str,
+        email: str,
+        categoria: str,
+        saldo: int
+    ) -> None:
+        self.__pf_repository.create_pf(
+            renda_mensal=renda_mensal,
+            idade=idade,
+            nome_completo=nome_completo,
+            celular=celular,
+            email=email,
+            categoria=categoria,
+            saldo=saldo
+        )
 
     def __format_response(self, person_info: Dict) -> Dict:
         return {

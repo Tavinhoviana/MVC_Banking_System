@@ -7,7 +7,7 @@ class MockPJRepository:
 
 def test_create():
     person_infos = {
-        "nome_completo": "GuingaMilionario",
+        "nome_completo": "Guinga Milionario",
         "renda_mensal": 5000,
         "idade": 20,
         "celular": 11969699696,
@@ -25,7 +25,7 @@ def test_create():
 
 def test_create_error():
     person_infos = {
-        "nome_completo": "Guinga Milionario",
+        "nome_completo": "Guinga@Milionario",
         "renda_mensal": 5000,
         "idade": 20,
         "celular": 11969699696,

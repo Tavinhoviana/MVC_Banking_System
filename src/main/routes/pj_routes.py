@@ -1,7 +1,27 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
+from src.views.http_types.http_request import HttpRequest
+
+from src.main.composer.pj_creator_composer import pj_creator_composer
+from src.main.composer.pj_withdraw_composer import pj_withdraw_composer
 
 pj_route_bp = Blueprint("pj", __name__)
 
 @pj_route_bp.route("/pj", methods=["GET"])
 def list_pjs():
-    return jsonify({"message": "Olá Mundo"}), 200
+    return jsonify({"message": "Olá Terra"}), 200
+
+@pj_route_bp.route("/pj", methods=["POST"])
+def create_pjs():
+    http_request = HttpRequest(body=request.json)
+    view = pj_creator_composer()
+    
+    http_response = view.handle(http_request)
+    return jsonify(http_response.body), http_response.status_code
+
+@pj_route_bp.route("/pj/withdraw", methods=["POST"])
+def pj_withdraw():
+    http_request = HttpRequest(body=request.json)
+    view = pj_withdraw_composer()
+    
+    http_response = view.handle(http_request)
+    return jsonify(http_response.body), http_response.status_code

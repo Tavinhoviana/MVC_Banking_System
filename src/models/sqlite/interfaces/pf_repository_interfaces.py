@@ -1,8 +1,8 @@
-from typing import List
 from abc import ABC, abstractmethod
+from typing import List
 from src.models.sqlite.entities.pf import PFTable
 
-class PFRepositoryInteface(ABC):
+class PFRepositoryInterface(ABC):
 
     @abstractmethod
     def list_pf(self) -> List[PFTable]:

@@ -7,7 +7,7 @@ class MockPFRepository:
 
 def test_create():
     person_infos = {
-        "nome_completo": "DjalmaDaMalasia",
+        "nome_completo": "Djalma Da Malasia",
         "renda_mensal": 1000,
         "idade": 18,
         "celular": 11963683670,
@@ -25,7 +25,7 @@ def test_create():
 
 def test_create_error():
     person_infos = {
-        "nome_completo": "Djalma da Malasia",
+        "nome_completo": "Djalma123",
         "renda_mensal": 1000,
         "idade": 18,
         "celular": 11963683670,

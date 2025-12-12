@@ -54,6 +54,5 @@ def test_list_pj_no_result():
     
     assert response == []
 
-# def test_create_pj_error():
-    # mock_connection = MockConnectionNoResult()
-    # repo = PJRepository(mock_connection)
+def update_pj(self, person):
+    self.person = person

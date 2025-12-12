@@ -54,3 +54,12 @@ class PJRepository(PJRepositoryInterface):
                 return person
             except NoResultFound:
                 return None
+    
+    def update_pj(self, pj: PJTable) -> None:
+        with self.__db_connection as database:
+            try:
+                database.session.merge(pj)
+                database.session.commit()
+            except Exception:
+                database.session.rollback()
+                raise
