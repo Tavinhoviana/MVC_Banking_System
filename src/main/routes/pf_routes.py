@@ -3,6 +3,7 @@ from src.views.http_types.http_request import HttpRequest
 
 from src.main.composer.pf_creator_composer import pf_creator_composer
 from src.main.composer.pf_withdraw_composer import pf_withdraw_composer
+from src.main.composer.pf_finder_composer import pf_finder_composer
 
 pf_route_bp = Blueprint("pf", __name__)
 
@@ -26,3 +27,10 @@ def pf_withdraw():
     http_response = view.handle(http_request)
     return jsonify(http_response.body), http_response.status_code
 
+@pf_route_bp.route("/pf/<pf_id>", methods=["GET"])
+def find_pf(pf_id):
+    http_request = HttpRequest(param={"pf_id": pf_id})
+    view = pf_finder_composer()
+
+    http_response = view.handle(http_request)
+    return jsonify(http_response.body), http_response.status_code

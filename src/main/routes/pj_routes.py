@@ -3,6 +3,8 @@ from src.views.http_types.http_request import HttpRequest
 
 from src.main.composer.pj_creator_composer import pj_creator_composer
 from src.main.composer.pj_withdraw_composer import pj_withdraw_composer
+from src.main.composer.pj_finder_composer import pj_finder_composer
+
 
 pj_route_bp = Blueprint("pj", __name__)
 
@@ -23,5 +25,13 @@ def pj_withdraw():
     http_request = HttpRequest(body=request.json)
     view = pj_withdraw_composer()
     
+    http_response = view.handle(http_request)
+    return jsonify(http_response.body), http_response.status_code
+
+@pj_route_bp.route("/pj/<pj_id>", methods=["GET"])
+def find_pj(pj_id):
+    http_request = HttpRequest(param={"pj_id": pj_id})
+    view = pj_finder_composer()
+
     http_response = view.handle(http_request)
     return jsonify(http_response.body), http_response.status_code
