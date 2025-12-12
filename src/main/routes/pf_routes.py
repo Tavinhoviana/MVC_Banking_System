@@ -5,6 +5,8 @@ from src.main.composer.pf_creator_composer import pf_creator_composer
 from src.main.composer.pf_withdraw_composer import pf_withdraw_composer
 from src.main.composer.pf_finder_composer import pf_finder_composer
 
+from src.errors.error_handler import handle_errors
+
 pf_route_bp = Blueprint("pf", __name__)
 
 @pf_route_bp.route("/pf", methods=["GET"])
@@ -13,24 +15,37 @@ def list_pfs():
 
 @pf_route_bp.route("/pf", methods=["POST"])
 def create_pfs():
-    http_request = HttpRequest(body=request.json)
-    view = pf_creator_composer()
+    try:
+        http_request = HttpRequest(body=request.json)
+        view = pf_creator_composer()
     
-    http_response = view.handle(http_request)
-    return jsonify(http_response.body), http_response.status_code
+        http_response = view.handle(http_request)
+        return jsonify(http_response.body), http_response.status_code
+    except Exception as exception:
+        http_response = handle_errors(exception)
+        return jsonify(http_response.body), http_response.status_code
+
 
 @pf_route_bp.route("/pf/withdraw", methods=["POST"])
 def pf_withdraw():
-    http_request = HttpRequest(body=request.json)
-    view = pf_withdraw_composer()
-    
-    http_response = view.handle(http_request)
-    return jsonify(http_response.body), http_response.status_code
+    try:
+        http_request = HttpRequest(body=request.json)
+        view = pf_withdraw_composer()
+        
+        http_response = view.handle(http_request)
+        return jsonify(http_response.body), http_response.status_code
+    except Exception as exception:
+        http_response = handle_errors(exception)
+        return jsonify(http_response.body), http_response.status_code
 
 @pf_route_bp.route("/pf/<pf_id>", methods=["GET"])
 def find_pf(pf_id):
-    http_request = HttpRequest(param={"pf_id": pf_id})
-    view = pf_finder_composer()
+    try:
+        http_request = HttpRequest(param={"pf_id": pf_id})
+        view = pf_finder_composer()
 
-    http_response = view.handle(http_request)
-    return jsonify(http_response.body), http_response.status_code
+        http_response = view.handle(http_request)
+        return jsonify(http_response.body), http_response.status_code
+    except Exception as exception:
+        http_response = handle_errors(exception)
+        return jsonify(http_response.body), http_response.status_code
