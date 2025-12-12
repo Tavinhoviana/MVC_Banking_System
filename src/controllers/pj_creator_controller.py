@@ -2,6 +2,7 @@ from typing import Dict
 import re
 from src.models.sqlite.interfaces.pj_repository_interfaces import PJRepositoryInterface
 from .interfaces.pj_creator_controller import PJCreatorControllerInterface
+from src.errors.error_types.http_bad_request import HttpBadRequestError
 
 class PJCreatorController(PJCreatorControllerInterface):
     def __init__(self, pj_repository: PJRepositoryInterface) -> None:
@@ -26,7 +27,7 @@ class PJCreatorController(PJCreatorControllerInterface):
     def __validate_nome_completo(self, nome_completo: str) -> None:
         pattern = re.compile(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$')
         if not pattern.match(nome_completo):
-            raise Exception("Invalid name")
+            raise HttpBadRequestError("Invalid name")
 
     def __insert_person_in_db(
         self,

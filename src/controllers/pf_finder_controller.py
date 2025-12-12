@@ -2,6 +2,7 @@ from typing import Dict
 from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInterface
 from src.models.sqlite.entities.pf import PFTable
 from .interfaces.pf_finder_controller import PFFinderControllerInterface
+from src.errors.error_types.http_not_found import HttpNotFoundError
 
 class PFFinderController(PFFinderControllerInterface):
     def __init__(self, pf_repository: PFRepositoryInterface) -> None:
@@ -15,7 +16,7 @@ class PFFinderController(PFFinderControllerInterface):
     def __find_person_in_db(self, person_id: int) -> PFTable:
         person = self.__pf_repository.get_person(person_id)
         if not person:
-            raise Exception("People not found")
+            raise HttpNotFoundError("People not found")
 
         return person
 

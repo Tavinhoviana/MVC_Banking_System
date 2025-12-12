@@ -2,6 +2,8 @@ from typing import Dict
 from src.models.sqlite.interfaces.pj_repository_interfaces import PJRepositoryInterface
 from src.models.sqlite.entities.pj import PJTable
 from .interfaces.pj_finder_controller import PJFinderControllerInterface
+from src.errors.error_types.http_not_found import HttpNotFoundError
+
 
 class PJFinderController(PJFinderControllerInterface):
     def __init__(self, pj_repository: PJRepositoryInterface) -> None:
@@ -15,7 +17,7 @@ class PJFinderController(PJFinderControllerInterface):
     def __find_person_in_db(self, person_id: int) -> PJTable:
         person = self.__pj_repository.get_person(person_id)
         if not person:
-            raise Exception("People not found")
+            raise HttpNotFoundError("People not found")
 
         return person
 

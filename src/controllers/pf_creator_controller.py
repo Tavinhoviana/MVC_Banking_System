@@ -2,6 +2,8 @@ from typing import Dict
 import re
 from src.models.sqlite.interfaces.pf_repository_interfaces import PFRepositoryInterface
 from .interfaces.pf_creator_controller import PFCreatorControllerInterface
+from src.errors.error_types.http_bad_request import HttpBadRequestError
+
 
 class PFCreatorController(PFCreatorControllerInterface):
     def __init__(self, pf_repository: PFRepositoryInterface) -> None:
@@ -27,7 +29,7 @@ class PFCreatorController(PFCreatorControllerInterface):
         # Permite letras acentuadas e espaços
         pattern = re.compile(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$')
         if not pattern.match(nome_completo):
-            raise Exception("Invalid name")
+            raise HttpBadRequestError("Invalid name")
 
     def __insert_person_in_db(
         self,
